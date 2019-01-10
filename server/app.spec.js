@@ -21,7 +21,7 @@ describe("GET root endpoint [/]", () => {
       });
   });
 
-  it("should return the string [Welcome to the Prescriptions API]", async () => {
+  it("should return the string ['Welcome to the Prescriptions API']", async () => {
     const expected = { message: "Welcome to the Prescriptions API" };
     const result = await supertest(app)
       .get("/")

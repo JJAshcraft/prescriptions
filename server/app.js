@@ -17,7 +17,6 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/api", apiRoutes);
-
 app.use(errorHandler);
 
 module.exports = app;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1546621864972" clover="3.2.0">
-  <project timestamp="1546621864972" name="All files">
+<coverage generated="1546825295872" clover="3.2.0">
+  <project timestamp="1546825295872" name="All files">
     <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1" elements="13" coveredelements="11" complexity="0" loc="11" ncloc="11" packages="1" files="1" classes="1">
       <file name="app.js" path="C:\Users\Josh\Documents\Dev\prescriptions\server\app.js">
         <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
@@ -13,8 +13,8 @@
         <line num="9" count="3" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
       </file>
     </metrics>
   </project>
