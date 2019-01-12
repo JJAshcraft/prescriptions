@@ -1,7 +1,5 @@
 ## Although I have a good amount of knowledge about Javascript, I learned even more about async/await & promises in the process of doing this challenge. I truly appreciate the opportunity you've given me.
 
-### JJ Ashcraft
-
 ## The route to substitute generic medications is located at:
 
 http://localhost:3300/api/prescriptions/substituteGeneric
