@@ -10,7 +10,10 @@ While building out this node project, I came across some interesting rules for N
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the server directory, you can run:
+
+###  `yarn` 
+Installs project dependencies.
 
 ### `yarn start`
 
