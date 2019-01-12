@@ -29,10 +29,3 @@ describe("GET root endpoint [/]", () => {
       });
   });
 });
-
-// beforeEach(() => {
-//   moxios.install();
-// });
-// afterEach(() => {
-//   moxios.uninstall();
-// });

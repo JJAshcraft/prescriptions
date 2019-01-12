@@ -1,14 +1,13 @@
-const getMedications = require("../../services/getMedications.js");
-const getPrescriptions = require("../../services/getPrescriptions.js");
 const utilities = require("../../utilities/utilities");
-const testData = require("./testdata.js");
 axios = require("axios");
-const wrapAsync = utilities.wrapAsync;
+// const testData = require("./testdata.js");
 
 const substituteGeneric = async (req, res, next) => {
-  const prescriptions = await getPrescriptions();
-
   try {
+    let prescriptions;
+    const url = "http://api-sandbox.pillpack.com/prescriptions";
+    prescriptions = await utilities.getPrescriptions(url);
+
     const build = await utilities.buildPrescriptionResults(prescriptions);
     const results = { prescription_updates: build };
     res.json(results);
@@ -17,4 +16,4 @@ const substituteGeneric = async (req, res, next) => {
   }
 };
 
-module.exports = substituteGeneric;
+module.exports = { substituteGeneric: substituteGeneric };

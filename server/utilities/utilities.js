@@ -88,6 +88,12 @@ function _removeNullValues(list) {
   return result;
 }
 
+const getPrescriptions = async url => {
+  let result = await axios.get(url);
+  return result.data;
+};
+
 module.exports = {
-  buildPrescriptionResults: buildPrescriptionResults
+  buildPrescriptionResults: buildPrescriptionResults,
+  getPrescriptions: getPrescriptions
 };
