@@ -19,7 +19,9 @@
   },
   "jest": {
     "collectCoverageOnlyFrom": {
-      "./app.js": true
+      "./app.js": true,
+      "./utilities/utilities.js": true,
+      "./helpers/prescriptionHelpers/substituteGeneric.js": true
     }
   }
 }

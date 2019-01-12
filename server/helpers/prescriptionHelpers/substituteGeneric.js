@@ -3,28 +3,18 @@ const getPrescriptions = require("../../services/getPrescriptions.js");
 const utilities = require("../../utilities/utilities");
 const testData = require("./testdata.js");
 axios = require("axios");
+const wrapAsync = utilities.wrapAsync;
 
 const substituteGeneric = async (req, res, next) => {
-  // const prescriptions = await getPrescriptions();
-  // const medications = await getMedications();
-  const prescriptions = testData.scripts;
-  const medications = testData.meds;
+  const prescriptions = await getPrescriptions();
 
-  const parseBrandNameMeds = await utilities.parseBrandNameMeds(
-    medications,
-    prescriptions
-  );
-
-  const rxcuiGenericMedications = await utilities.getRxcuiMedications(
-    parseBrandNameMeds
-  );
-  console.log(rxcuiGenericMedications);
-  const buildPrescriptionUpdate = utilities.buildPrescriptionUpdate(
-    parseBrandNameMeds,
-    rxcuiGenericMedications
-  );
-  const results = { prescription_updates: buildPrescriptionUpdate };
-  res.json(results);
+  try {
+    const build = await utilities.buildPrescriptionResults(prescriptions);
+    const results = { prescription_updates: build };
+    res.json(results);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
 };
 
 module.exports = substituteGeneric;

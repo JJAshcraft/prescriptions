@@ -1,65 +1,93 @@
 const axios = require("axios");
 
-function parseBrandNameMeds(meds, prescriptions) {
-  const newPrescriptions = prescriptions.map(scripts => {
-    const newMeds = meds.filter(
-      med => med.generic === false && scripts.medication_id === med.id
-    );
-    return newMeds[0];
+async function buildPrescriptionResults(prescriptions) {
+  const prescriptionList = prescriptions.map(async prescription => {
+    const medication = await _getMedication(prescription); //get medication info from prescription
+    const { rxcui, generic } = medication.data; //destructure needed variables from medication
+
+    if (generic === false) {
+      //use only brand name medications from prescriptions
+
+      const rxcuiList = await _getRxcuiEquivalents(rxcui); //check if rxcui equivalents exist
+
+      const generic = _filterOnlyGenerics(rxcuiList.data); //filter only to generics
+      if (generic != undefined) {
+        return Object.assign(prescription, {
+          //add fields to prescription list for comparison
+          genericId: generic.id,
+          rxcui: rxcui
+        });
+      }
+    }
   });
-  filteredPrescriptions = removeUndefinedValues(newPrescriptions);
-  return filteredPrescriptions;
-}
 
-async function getRxcuiMedications(medications) {
-  const promises = medications.map(async medication => {
-    const rxcuiList = await axios.get(
-      `http://api-sandbox.pillpack.com/medications?rxcui=${medication.rxcui}`
-    );
-    return filterOnlyGenerics(rxcuiList.data);
-  });
-
-  const results = await Promise.all(promises);
-  filteredResults = removeUndefinedValues(results);
-  return filteredResults;
-}
-
-function filterOnlyGenerics(medications) {
-  const generics = medications.filter(
-    medication => medication.generic === true
-  );
-  return generics[0];
-}
-
-function removeUndefinedValues(array) {
-  const results = array.filter(el => el != undefined);
+  const promiseResults = await Promise.all(prescriptionList); //waits for all promises to resolve from map function
+  const results = cleanUp(promiseResults); //copies and cleans up presentation of objects
   return results;
 }
 
-function buildPrescriptionUpdate(prescriptions, medications) {
-  const prescriptionUpdate = prescriptions.map(script => {
-    const matchingGeneric = medications.filter(medication => {
-      if (medication.id != script.id) {
-        return false;
-      } else {
-        return true;
+function cleanUp(results) {
+  //remove any null values generated above
+  const resultsNoNulls = _removeNullValues(results);
+  const finalObjects = resultsNoNulls.map(object => {
+    //copies each object to new object for presentation purposes
+    let copy = Object.assign(
+      {},
+      {
+        prescription_id: object.id,
+        medication_id: object.genericId
       }
-    });
-
-    console.log(matchingGeneric);
-    const result = {
-      prescription_id: script.id,
-      medication_id: matchingGeneric.id
-    };
-    return result;
+    );
+    return copy;
   });
 
-  return prescriptionUpdate;
+  return finalObjects;
+}
+
+async function _getMedication(prescription) {
+  const medication = await axios
+    .get(
+      `http://api-sandbox.pillpack.com/medications/${
+        prescription.medication_id
+      }`
+    )
+    .catch(err => {
+      res.status(404).json({
+        message: `Error while getting medication from prescription list ${
+          err.message
+        }`
+      });
+    });
+  return medication;
+}
+
+async function _getRxcuiEquivalents(rxcui) {
+  const medicationList = await axios
+    .get(`http://api-sandbox.pillpack.com/medications?rxcui=${rxcui}`)
+    .catch(err => {
+      res.status(404).json({
+        message: `Error while looking up generic medication via rxcui, ${
+          err.message
+        }`
+      });
+    });
+  return medicationList;
+}
+
+function _filterOnlyGenerics(list) {
+  const result = list.find(_isGeneric);
+  return result;
+}
+
+function _isGeneric(medication) {
+  return medication.generic === true;
+}
+
+function _removeNullValues(list) {
+  const result = list.filter(item => item != null);
+  return result;
 }
 
 module.exports = {
-  parseBrandNameMeds: parseBrandNameMeds,
-  getRxcuiMedications: getRxcuiMedications,
-  filterOnlyGenerics: filterOnlyGenerics,
-  buildPrescriptionUpdate: buildPrescriptionUpdate
+  buildPrescriptionResults: buildPrescriptionResults
 };
