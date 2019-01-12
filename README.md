@@ -6,7 +6,7 @@ http://localhost:3300/api/prescriptions/substituteGeneric
 
 ## State laws regarding generic substitution and NTID's
 
-While building out this node project, I came across some interesting rules for Narrow Therapeuticc Index drugs, and certain state laws that prohibit generic medication substitution without pt and/or provider consent. You can find some of this information in the DataRules.js file in the base directory.
+While building out this node project, I came across some interesting rules for Narrow Therapeutic Index drugs, and certain state laws that prohibit generic medication substitution without pt and/or provider consent. You can find some of this information in the DataRules.js file in the base directory. 
 
 ## Available Scripts
 
