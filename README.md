@@ -1,6 +1,12 @@
 ## Although I have a good amount of knowledge about Javascript, I learned even more about async/await & promises in the process of doing this challenge. I truly appreciate the opportunity you've given me.
 
-## The route to substitute generic medications is located at:
+## Deployed URL Root:
+https://zeit.co/kyucOfpFxcEGK1CoPIMqmkzv/server/whsqvuluvw
+
+## Deployed URL substitute generic medications:
+https://server-whsqvuluvw.now.sh/api/prescriptions/substituteGeneric
+
+## The local host route substitute generic medications is:
 
 http://localhost:3300/api/prescriptions/substituteGeneric
 
