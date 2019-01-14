@@ -1,10 +1,10 @@
 ## Although I have a good amount of knowledge about Javascript, I learned even more about async/await & promises in the process of doing this challenge. I truly appreciate the opportunity you've given me.
 
 ## Deployed URL Root:
-https://server-bwjtpwzezb.now.sh/
+https://server-kretaafrsx.now.sh/
 
 ## Deployed URL substitute generic medications:
-https://server-bwjtpwzezb.now.sh/api/prescriptions/substituteGeneric
+https://server-kretaafrsx.now.sh/api/prescriptions/substituteGeneric
 
 ## The local host route substitute generic medications is:
 
