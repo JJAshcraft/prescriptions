@@ -4,11 +4,11 @@ const apiRoutes = require("./routes/apiRoutes.js");
 
 app.use(express.json());
 
-app.get("/", (err, req, res, next) => {
-  if (err) {
-    res.status(500).send({ message: err.message });
-  } else {
+app.get("/", (req, res, next) => {
+  try {
     res.status(200).send({ message: "Welcome to the Prescriptions API" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
   }
 });
 
