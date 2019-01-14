@@ -4,7 +4,7 @@ const apiRoutes = require("./routes/apiRoutes.js");
 
 app.use(express.json());
 
-app.get("/", (req, res, next) => {
+app.get("/", (err, req, res, next) => {
   if (err) {
     res.status(500).send({ message: err.message });
   } else {
