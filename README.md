@@ -1,4 +1,3 @@
-## Although I have a good amount of knowledge about Javascript, I learned even more about async/await & promises in the process of doing this challenge. I truly appreciate the opportunity you've given me.
 
 ## Deployed URL Root:
 https://server-kretaafrsx.now.sh/
