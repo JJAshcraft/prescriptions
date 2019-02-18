@@ -2,6 +2,11 @@
 ## Deployed URL Root:
 https://server-kretaafrsx.now.sh/
 
+The substitute generic's route:
+1.) takes in a list of medications
+2.) filters down to only brand medications
+3.) checks for an equivalent generic
+4.) returns the original prescription id with an updated generic medication id.
 ## Deployed URL substitute generic medications:
 https://server-kretaafrsx.now.sh/api/prescriptions/substituteGeneric
 
