@@ -1,7 +1,4 @@
 
-## Deployed URL Root:
-https://server-kretaafrsx.now.sh/
-
 The substitute generic's route:
 1.) takes in a list of medications
 2.) filters down to only brand medications
